@@ -272,7 +272,7 @@ var SimInfiniteSlider = (function() {
 	}
 
 	SimInfiniteSlider.prototype = {
-		constructor: InfiniteSlider,
+		constructor: SimInfiniteSlider,
 		preventSlide: preventSlide,
 		setAmountOfSlidesShown: setAmountOfSlidesShown,
 		moveToSlide: moveToSlide,
@@ -286,22 +286,3 @@ var SimInfiniteSlider = (function() {
 	return SimInfiniteSlider;
 
 }());
-
-var wrapper = document.getElementById('wrapper'),
-	innerWrapper = document.getElementById('innerWrapper'),
-	items = document.getElementsByClassName('item'),
-	prev = document.getElementById('prev'),
-	next = document.getElementById('next'),
-	other = document.getElementById('other');
-
-var mySlider = new InfiniteSlider(items, {
-	margin: 5
-});
-
-next.addEventListener('click', function() {
-	mySlider.slideToNextSet();
-});
-
-prev.addEventListener('click', function() {
-	mySlider.slideToPrevSet();
-});
