@@ -1,0 +1,30 @@
+*,
+*:before,
+*:after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+#something {
+	padding-left: 400px;
+	
+}
+
+.infiniteSlider-outerWrapper {
+	/*overflow: hidden;*/
+	background-color: green;
+}
+
+.infiniteSlider-innerWrapper {
+	white-space: nowrap;
+	transition: transform 1s ease;
+}
+
+.infiniteSlider-slides {
+	background-color: tomato;
+	width: 100px;
+	height: 100px;
+	border: 1px solid blue;
+	display: inline-block;
+}
