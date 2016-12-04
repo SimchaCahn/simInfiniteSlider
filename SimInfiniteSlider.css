@@ -6,13 +6,8 @@
 	box-sizing: border-box;
 }
 
-#something {
-	padding-left: 400px;
-	
-}
-
 .infiniteSlider-outerWrapper {
-	/*overflow: hidden;*/
+	overflow: hidden;
 	background-color: green;
 }
 
