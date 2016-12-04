@@ -51,6 +51,8 @@ var Utils = (function() {
 	};
 })();
 
+console.clear();
+
 
 
 
@@ -197,6 +199,8 @@ var SimInfiniteSlider = (function() {
 	}
 	
 	function slideToPx(amount, relative, animate) {
+		if (typeof amount !== 'number') return;
+		
 		currentPxPos = (relative) ? currentPxPos + amount : amount;
 
 		if (!animate) innerWrapper.style.transition = 'none';
@@ -214,9 +218,9 @@ var SimInfiniteSlider = (function() {
 
 		var slideAmount = 0,
 			tempLastSlideShown = (relative) ? lastSlideShown + index : index;
-
+		
 		tempLastSlideShown = Utils.clamp(tempLastSlideShown, amountOfSlidesShown, innerWrapper.children.length);
-
+		
 		if (tempLastSlideShown === lastSlideShown) return; // It's holding where it should. Don't do anything
 
 		// Callback
@@ -224,8 +228,8 @@ var SimInfiniteSlider = (function() {
 		
 		lastSlideShown = tempLastSlideShown;
 		slideAmount = (lastSlideShown - amountOfSlidesShown) * moveSlideAmount;
-		slideAmount = -slideAmount;		
-
+		slideAmount = -slideAmount;
+		
 		// Start Slide
 		slideToPx(slideAmount, false, animate);
 		// Callback
@@ -248,9 +252,9 @@ var SimInfiniteSlider = (function() {
 			var remainderSlides = amountOfSlides - lastSlideShown;
 			slideAmount = remainderSlides;
 		}
-
+		
 		setTimeout(function() {
-			moveToSlide(slideAmount, animate, true);
+			moveToSlide(slideAmount, true, animate);
 		});
 	}
 
@@ -273,7 +277,7 @@ var SimInfiniteSlider = (function() {
 		slideAmount = -slideAmount;
 
 		setTimeout(function() {
-			moveToSlide(slideAmount, animate, true);
+			moveToSlide(slideAmount, true, animate);
 		});
 	}
 
