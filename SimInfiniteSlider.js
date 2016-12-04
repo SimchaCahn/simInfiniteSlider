@@ -51,8 +51,6 @@ var Utils = (function() {
 	};
 })();
 
-console.clear();
-
 
 
 
