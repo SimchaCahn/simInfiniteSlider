@@ -20,7 +20,7 @@ To start working with simInfiniteSlider, you need to add the following two files
 Just add a link to the css file in your `<head>`:
 
 ```html
-<link rel="stylesheet" type="text/css" href="https://rawgit.com/SimchaCahn/simInfiniteSlider/master/SimInfiniteSlider.css"/>`
+<link rel="stylesheet" type="text/css" href="https://rawgit.com/SimchaCahn/simInfiniteSlider/master/SimInfiniteSlider.css"/>
 ```
 
 Then, before your closing ```<body>``` tag add:
@@ -43,7 +43,7 @@ Next, have a list of html elements.
 </div>
 ```
 
-Lastly, in your JavaScript file, or your inline JavaScript add `new SimInfiniteSlider(items);`. For example:
+Lastly, in your JavaScript file, or your inline JavaScript add `new SimInfiniteSlider(items);`, where `items` are the list of items to slide. For example:
 
 ```javascript
 var items = document.getElementsByClassName('item');
