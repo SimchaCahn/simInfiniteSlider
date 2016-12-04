@@ -271,7 +271,7 @@ var SimInfiniteSlider = (function() {
 		moveToSlide(amountOfSlides, false, animate);
 	}
 
-	InfiniteSlider.prototype = {
+	SimInfiniteSlider.prototype = {
 		constructor: InfiniteSlider,
 		preventSlide: preventSlide,
 		setAmountOfSlidesShown: setAmountOfSlidesShown,
