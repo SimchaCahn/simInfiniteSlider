@@ -39,12 +39,15 @@ var Utils = (function() {
 			elementSuportedFormatError(elements);
 		}
 	}
+	
+	function emptyFunction() {}
 
 	return {
 		isObject: isObject,
 		extend: extend,
 		clamp: clamp,
 		convertElementsToArray: convertElementsToArray,
+		emptyFunction: emptyFunction
 	};
 })();
 
@@ -68,9 +71,15 @@ var SimInfiniteSlider = (function() {
 		amountOfSlides = 0,
 		amountOfSlidesWithDups = 0,
 		defaultOptions = {
-			margin: 0,
-			numberOfCellsToShow: 2,
-			lastSlideToShow: 0
+			margin: 3,
+			numberOfSlidesToShow: 2,
+			lastSlideToShow: 0,
+			
+			// Callbacks
+			beforeInit: Utils.emptyFunction,
+			afterInit: Utils.emptyFunction,
+			beforeSlide: Utils.emptyFunction,
+			afterSlide: Utils.emptyFunction
 		},
 		userOptions = {};
 
@@ -89,6 +98,9 @@ var SimInfiniteSlider = (function() {
 	}
 
 	function init() {
+		// Callback
+		userOptions.beforeInit();
+		
 		configDOM();
 
 		currentPxPos = 1 - moveSetAmount;
@@ -97,11 +109,13 @@ var SimInfiniteSlider = (function() {
 
 		innerWrapper.addEventListener('transitionend', finishSlideCallback);
 
-		setAmountOfSlidesShown(userOptions.numberOfCellsToShow);
+		setAmountOfSlidesShown(userOptions.numberOfSlidesToShow);
 		lastSlideShown = amountOfSlidesShown;
 		
 		// If lastSlideToShow is set. i.e. it's not set to its default value of 0
-		if (userOptions.lastSlideToShow) moveToSlide(userOptions.lastSlideToShow, false, false)
+		if (userOptions.lastSlideToShow) moveToSlide(userOptions.lastSlideToShow, false, false);
+		// Callback
+		userOptions.afterInit(innerWrapper, outerWrapper);
 	}
 	
 	function configDOM() {
@@ -167,17 +181,6 @@ var SimInfiniteSlider = (function() {
 		preventSlide = false;
 	}
 
-	function slideToPx(amount, relative, animate) {
-		currentPxPos = (relative) ? currentPxPos + amount : amount;
-
-		if (!animate) innerWrapper.style.transition = 'none';
-		innerWrapper.style.transform = 'translate3d(' + currentPxPos + 'px, 0, 0)';
-		setTimeout(function() {
-			innerWrapper.style.transition = '';
-		});
-
-		if (!animate) preventSlide = false;
-	}
 	
 	function setAmountOfSlidesShown(value) {
 		if (typeof value !== 'number' || value === amountOfSlidesShown) return;
@@ -194,6 +197,18 @@ var SimInfiniteSlider = (function() {
 		moveSetAmount = moveSlideAmount * value;
 		outerWrapper.style.width = moveSetAmount + 'px';
 	}
+	
+	function slideToPx(amount, relative, animate) {
+		currentPxPos = (relative) ? currentPxPos + amount : amount;
+
+		if (!animate) innerWrapper.style.transition = 'none';
+		innerWrapper.style.transform = 'translate3d(' + currentPxPos + 'px, 0, 0)';
+		setTimeout(function() {
+			innerWrapper.style.transition = '';
+		});
+
+		if (!animate) preventSlide = false;
+	}
 
 	function moveToSlide(index, relative, animate) {
 		if (preventSlide || typeof index !== 'number') return;
@@ -206,14 +221,20 @@ var SimInfiniteSlider = (function() {
 
 		if (tempLastSlideShown === lastSlideShown) return; // It's holding where it should. Don't do anything
 
+		// Callback
+		userOptions.beforeSlide(lastSlideShown, tempLastSlideShown);
+		
 		lastSlideShown = tempLastSlideShown;
 		slideAmount = (lastSlideShown - amountOfSlidesShown) * moveSlideAmount;
+		slideAmount = -slideAmount;		
 
 		// Start Slide
-		slideToPx(-slideAmount, false, animate);
+		slideToPx(slideAmount, false, animate);
+		// Callback
+		userOptions.afterSlide(lastSlideShown, slideAmount);
 	}
 
-	function slideToNextSet() {
+	function slideToNextSet(animate) {
 		if (preventSlide) return;
 
 		var slideAmount = amountOfSlidesShown,
@@ -231,11 +252,11 @@ var SimInfiniteSlider = (function() {
 		}
 
 		setTimeout(function() {
-			moveToSlide(slideAmount, true, true);
+			moveToSlide(slideAmount, animate, true);
 		});
 	}
 
-	function slideToPrevSet() {
+	function slideToPrevSet(animate) {
 		if (preventSlide) return;
 
 		var slideAmount = amountOfSlidesShown,
@@ -254,7 +275,7 @@ var SimInfiniteSlider = (function() {
 		slideAmount = -slideAmount;
 
 		setTimeout(function() {
-			moveToSlide(slideAmount, true, true);
+			moveToSlide(slideAmount, animate, true);
 		});
 	}
 
