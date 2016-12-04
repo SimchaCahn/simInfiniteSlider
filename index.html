@@ -1,12 +1,52 @@
- <div id="slider">
-	<div class="item">Item - 1</div>
-	<div class="item">Item - 2</div>
-	<div class="item">Item - 3</div>
-	<div class="item">Item - 4</div>
-	<div class="item">Item - 5</div>
-	<div class="item">Item - 6</div>
-	<div class="item">Item - 7</div>
-</div>
+<!doctype html>
 
-<button id="prev">Previous</button>
-<button id="next">Next</button>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>simInfiniteSlider</title>
+
+	<link rel="stylesheet" type="text/css" href="https://rawgit.com/SimchaCahn/simInfiniteSlider/master/SimInfiniteSlider.css" />
+
+</head>
+
+<body>
+
+
+	<div id="slider">
+		<div class="item">Item - 1</div>
+		<div class="item">Item - 2</div>
+		<div class="item">Item - 3</div>
+		<div class="item">Item - 4</div>
+		<div class="item">Item - 5</div>
+		<div class="item">Item - 6</div>
+		<div class="item">Item - 7</div>
+	</div>
+
+	<button id="prev">Previous</button>
+	<button id="next">Next</button>
+
+	<script type="text/javascript" src="https://rawgit.com/SimchaCahn/simInfiniteSlider/master/SimInfiniteSlider.js"></script>
+
+	<script type="text/javascript">
+		var items = document.getElementsByClassName('item'),
+				prev = document.getElementById('prev'),
+				next = document.getElementById('next');
+		
+		var mySlider = new SimInfiniteSlider(items, {
+			margin: 5
+		});
+		
+		next.addEventListener('click', function() {
+			mySlider.slideToNextSet();
+		});
+		
+		prev.addEventListener('click', function() {
+			mySlider.slideToPrevSet();
+		});
+	</script>
+
+</body>
+	
+</html>
