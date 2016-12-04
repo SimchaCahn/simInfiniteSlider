@@ -107,5 +107,5 @@ Licensed under the MIT license.
 
 I would **love** ❤️ to see feedback, and constructive critsism.
 
-Any question, comments, or to just say "Hello", just email me at: simchacahn(at)gmail.com
+Any question, comments, or just to stop by, and say "Hello", just email me at: simchacahn(at)gmail.com
 
