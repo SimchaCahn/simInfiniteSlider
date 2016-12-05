@@ -171,7 +171,6 @@ var SimInfiniteSlider = (function() {
 		// Slider is holding at the duplicates
 
 		var halfOfDups = amountOfSlidesShown / 2;
-
 		if (lastSlideShown > amountOfSlides + halfOfDups) slideToEndAfterDups(animate); // 'lastSlideShown' is closer to absolute end
 		else slideToEndBeforeDups(animate); // 'lastSlideShown' is closer to slides.length end
 	}
@@ -221,8 +220,6 @@ var SimInfiniteSlider = (function() {
 		
 		tempLastSlideShown = SliderUtils.clamp(tempLastSlideShown, amountOfSlidesShown, innerWrapper.children.length);
 		
-		if (tempLastSlideShown === lastSlideShown) return; // It's holding where it should. Don't do anything
-
 		// Callback
 		userOptions.beforeSlide(lastSlideShown, tempLastSlideShown);
 		
