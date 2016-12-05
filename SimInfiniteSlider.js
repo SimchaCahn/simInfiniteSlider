@@ -242,7 +242,10 @@ var SimInfiniteSlider = (function() {
 		if (lastSlideShown === innerWrapper.children.length) {
 			// Slider is at absolute end. Got to beginning, then slide to next slide
 			slideToBeginning()
-		} else if (upcomingLastSlideShown > amountOfSlides && lastSlideShown !== amountOfSlides) {
+		}
+		// Can't do 'else' because next if statement possible when at beginning.
+		// Example case. 4 slides, while 3 slides show at once.
+		if (upcomingLastSlideShown > amountOfSlides && lastSlideShown !== amountOfSlides) {
 			// Upcoming amount to slide isn't divisable by amountOfSlidesShown
 			// And, slider is NOT at end, before the duplicates. If it is, slide to duplicates
 			// Get remainder amount, then slide that much
@@ -266,7 +269,9 @@ var SimInfiniteSlider = (function() {
 			// And, slider is NOT at absolute end. If it is, slide regularly backwards
 			// Slide remainder amount backwards
 			slideAmount = remainder;
-		} else if (lastSlideShown === amountOfSlidesShown) {
+		}
+		
+		if (lastSlideShown === amountOfSlidesShown) {
 			// Slider is holding at beginning
 			// Got to end, then slide back regularly
 			slideToEndAfterDups(false);
