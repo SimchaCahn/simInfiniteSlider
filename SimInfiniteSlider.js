@@ -1,4 +1,4 @@
-var Utils = (function() {
+var SliderUtils = (function() {
 
 	function isObject(val) {
 		if (val === null) return;
@@ -76,10 +76,10 @@ var SimInfiniteSlider = (function() {
 			lastSlideToShow: 0,
 			
 			// Callbacks
-			beforeInit: Utils.emptyFunction,
-			afterInit: Utils.emptyFunction,
-			beforeSlide: Utils.emptyFunction,
-			afterSlide: Utils.emptyFunction
+			beforeInit: SliderUtils.emptyFunction,
+			afterInit: SliderUtils.emptyFunction,
+			beforeSlide: SliderUtils.emptyFunction,
+			afterSlide: SliderUtils.emptyFunction
 		},
 		userOptions = {};
 
@@ -89,10 +89,10 @@ var SimInfiniteSlider = (function() {
 		innerWrapper = document.createElement('div');
 
 	function SimInfiniteSlider(elems, options) {
-		slides = Utils.convertElementsToArray(elems);
+		slides = SliderUtils.convertElementsToArray(elems);
 		parentElem = slides[0].parentElement;
 
-		userOptions = Utils.extend(defaultOptions, options);
+		userOptions = SliderUtils.extend(defaultOptions, options);
 
 		init();
 	}
@@ -219,7 +219,7 @@ var SimInfiniteSlider = (function() {
 		var slideAmount = 0,
 			tempLastSlideShown = (relative) ? lastSlideShown + index : index;
 		
-		tempLastSlideShown = Utils.clamp(tempLastSlideShown, amountOfSlidesShown, innerWrapper.children.length);
+		tempLastSlideShown = SliderUtils.clamp(tempLastSlideShown, amountOfSlidesShown, innerWrapper.children.length);
 		
 		if (tempLastSlideShown === lastSlideShown) return; // It's holding where it should. Don't do anything
 
