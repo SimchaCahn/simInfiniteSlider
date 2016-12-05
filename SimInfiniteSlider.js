@@ -163,7 +163,7 @@ var SimInfiniteSlider = (function() {
 			}
 		}
 
-		moveOutOfBetweenDups(true);
+		moveOutOfBetweenDups(false);
 	}
 
 	function moveOutOfBetweenDups(animate) {
