@@ -236,7 +236,7 @@ var SimInfiniteSlider = (function() {
 		userOptions.afterSlide(lastSlideShown, slideAmount);
 	}
 
-	function slideToNextSet(animate) {
+	function slideToNextSet() {
 		if (preventSlide) return;
 
 		var slideAmount = amountOfSlidesShown,
@@ -254,11 +254,11 @@ var SimInfiniteSlider = (function() {
 		}
 		
 		setTimeout(function() {
-			moveToSlide(slideAmount, true, animate);
+			moveToSlide(slideAmount, true, true);
 		});
 	}
 
-	function slideToPrevSet(animate) {
+	function slideToPrevSet() {
 		if (preventSlide) return;
 
 		var slideAmount = amountOfSlidesShown,
@@ -277,13 +277,12 @@ var SimInfiniteSlider = (function() {
 		slideAmount = -slideAmount;
 
 		setTimeout(function() {
-			moveToSlide(slideAmount, true, animate);
+			moveToSlide(slideAmount, true, true);
 		});
 	}
 
 	function slideToBeginning(animate) {
-		slideToPx(0, false, animate);
-		lastSlideShown = amountOfSlidesShown;
+		moveToSlide(amountOfSlidesShown, false, animate);
 	}
 
 	function slideToEndAfterDups(animate) {
