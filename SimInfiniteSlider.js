@@ -207,7 +207,7 @@ var SimInfiniteSlider = (function() {
 		setTimeout(function() {
 			innerWrapper.style.transition = '';
 		});
-
+		
 		if (!animate) preventSlide = false;
 	}
 
@@ -229,6 +229,7 @@ var SimInfiniteSlider = (function() {
 		
 		// Start Slide
 		slideToPx(slideAmount, false, animate);
+		
 		// Callback
 		userOptions.afterSlide(lastSlideShown, slideAmount);
 	}
@@ -241,7 +242,7 @@ var SimInfiniteSlider = (function() {
 
 		if (lastSlideShown === innerWrapper.children.length) {
 			// Slider is at absolute end. Got to beginning, then slide to next slide
-			slideToBeginning()
+			slideToBeginning();
 		}
 		// Can't do 'else' because next if statement possible when at beginning.
 		// Example case. 4 slides, while 3 slides show at once.
@@ -255,7 +256,7 @@ var SimInfiniteSlider = (function() {
 		
 		setTimeout(function() {
 			moveToSlide(slideAmount, true, true);
-		});
+		}, 100);
 	}
 
 	function slideToPrevSet() {
